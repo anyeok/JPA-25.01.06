@@ -15,15 +15,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
 @ActiveProfiles("test")
 @Transactional
-@Rollback(false)
 public class ArticleServiceTest {
     @Autowired
     private ArticleService articleService;
 
     @DisplayName("글 쓰기")
     @Test
+    @Rollback(false)
     void t1() {
-        RsData<Article> joinRs = articleService.write("제목", "내용");
+        RsData<Article> joinRs = articleService.write(1, "제목", "내용");
         Article article = joinRs.getData();
 
         assertThat(article.getId()).isGreaterThan(0L);
