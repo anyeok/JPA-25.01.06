@@ -30,6 +30,14 @@ public class ArticleService {
         return RsData.of("200", "%d번 게시물이 작성되었습니다.".formatted(article.getId()), article);
     }
 
+    @Transactional
+    public void modify(Article article, String title, String body) {
+        article.setTitle(title);
+        article.setBody(body);
+
+        articleRepository.save(article);
+    }
+
     public Optional<Article> findById(long id) {
         return articleRepository.findById(id);
     }
